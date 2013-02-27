@@ -8,17 +8,18 @@ would also like to make the program output data formatted in html.
 GOALS:
   
   Completed:
-    -Label each column for the Statistics section
-    -Label each column for the Resistances section
-    -Fix formatting issues in Statistics section
-    -Fix formatting issues in Resistances section
-    -Remove unnecessary grid formatting
+    -Label each column for the Statistics section     2/26/2012
+    -Label each column for the Resistances section    2/26/2012
+    -Fix formatting issues in Statistics section      2/26/2012
+    -Fix formatting issues in Resistances section     2/26/2012
+    -Remove unnecessary grid formatting               2/26/2012
+    -Create Armor Class section                       2/26/2012
+    -Flesh out Basic Character Information Section    2/26/2012
   
   In Progress Features:
   
   In Progress Additions:
-    -Create Armor Class section
-    -Flesh out Basic Character Information Section
+    -Add Skill section
 
   Future Features:
     -Saving and Loading characters
