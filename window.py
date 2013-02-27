@@ -9,9 +9,10 @@ def print_entries():
 
 #Generic function used to create empty column/row of any size
 #Seems extremely cumbersome and doesn't output properly all the time
+#Not currently in use
 #GOAL: Figure out a better way to create space between different sections
 def empty_section(master, x, y, length, height):
-    empty = Label(master, text='  ')
+    empty = Label(master, text='1234')
     empty.grid(column=x, 
                row=y, 
                columnspan=length, 
@@ -22,105 +23,140 @@ def empty_section(master, x, y, length, height):
 #GOAL: Add more characteristics
 #GOAL: Change formattting to make it prettier
 def set_basic(master):
-    BASIC_WIDTH = 16
-    BASIC_ROW = 1; BASIC_COL = 0; BASIC_SPAN = 6
+    BASIC_SECTION_LABEL_ROW = 0
+    BASIC_SECTION_LABEL_COL = 0
+    BASIC_SECTION_LABEL_SPAN = 100
+    BASIC_ENTRY_LABEL_ROW = BASIC_SECTION_LABEL_ROW + 1
+    BASIC_ENTRY_LABEL_COL = 0
+    BASIC_ENTRY_LABEL_SPAN = 1
+    BASIC_ENTRY_ROW = BASIC_ENTRY_LABEL_ROW
+    BASIC_ENTRY_COL = BASIC_ENTRY_LABEL_COL + 1
+    BASIC_ENTRY_WIDTH = 16
+    BASIC_ENTRY_SPAN = 4
 
     basicSectionLabel = Label(master, text='Basic Character Information')
-    basicSectionLabel.grid(row=BASIC_ROW, 
-                            column=BASIC_COL, 
-                            columnspan=100)
-
+    basicSectionLabel.grid(row=BASIC_SECTION_LABEL_ROW, 
+                           column=BASIC_SECTION_LABEL_COL, 
+                           columnspan=BASIC_SECTION_LABEL_SPAN)
+                           
+    #Prints labels for each entry() it places
     for value in range(len(base)):
         basicLabel = Label(master, text=base[value])
+        basicLabel.grid(row=BASIC_ENTRY_LABEL_ROW,
+                        column=BASIC_ENTRY_LABEL_COL+value*
+                               (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
+                        columnspan=BASIC_ENTRY_LABEL_SPAN)
 
         basic = Entry(master)
-        basic.config(width=BASIC_WIDTH)
-
-        if(value != 0):
-            basicLabel.grid(row=BASIC_ROW+1, 
-                            column=value*(BASIC_WIDTH/2)+2*value, 
-                            columnspan=4)
-            basic.grid(row=BASIC_ROW+1, 
-                       column=value*(BASIC_WIDTH/2)+BASIC_SPAN+2*(value-1), 
-                       columnspan=BASIC_SPAN)
-        else:
-            basicLabel.grid(row=BASIC_ROW+1, 
-                            column=value*(BASIC_WIDTH/2), 
-                            columnspan=4)
-            basic.grid(row=BASIC_ROW+1, 
-                       column=value*(BASIC_WIDTH/2)+5, 
-                       columnspan=BASIC_SPAN)
+        basic.config(width=BASIC_ENTRY_WIDTH)
+        basic.grid(row=BASIC_ENTRY_ROW,
+                   column=BASIC_ENTRY_COL+value*
+                          (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
+                   columnspan=BASIC_ENTRY_SPAN)
 
         entries[value] = basic
 
 #Creates stat labels and input grid
-#May need more entry() modules
-#Formatting seems off
-#GOAL: Label each entry column
-#GOAL: Make the formatting look better
 def set_stats(master):
-    STAT_ROW = 4; STAT_COL = 0; STAT_WIDTH = 3
+    STAT_SECTION_LABEL_ROW = 3
+    STAT_SECTION_LABEL_COL = 0
+    STAT_SECTION_LABEL_SPAN = 5
+    STAT_ROW_LABEL_ROW = STAT_SECTION_LABEL_ROW + 2
+    STAT_ROW_LABEL_COL = 0
+    STAT_ROW_LABEL_SPAN = 1
+    STAT_COL_LABEL_ROW = STAT_SECTION_LABEL_ROW + 1
+    STAT_COL_LABEL_COL = STAT_ROW_LABEL_COL + STAT_ROW_LABEL_SPAN-1
+    STAT_ENTRY_ROW = STAT_COL_LABEL_ROW + 1
+    STAT_ENTRY_COL = STAT_ROW_LABEL_SPAN
+    STAT_ENTRY_WIDTH = 4
 
+    colLabels = (' ', 'Base', 'Mod', 'Total', 'Bonus')
+    
     statSectionLabel = Label(master, text='Statistics')
-    statSectionLabel.grid(row=STAT_ROW, 
-                            column=STAT_COL, 
-                            columnspan=9)
-
+    statSectionLabel.grid(row=STAT_SECTION_LABEL_ROW, 
+                          column=STAT_SECTION_LABEL_COL, 
+                          columnspan=STAT_SECTION_LABEL_SPAN)
+    #Prints stat column labels
+    for label in range(len(colLabels)):
+        nextLabel = Label(master, text=colLabels[label])
+        nextLabel.grid(row=STAT_COL_LABEL_ROW,
+                       column=STAT_COL_LABEL_COL+label)
+    #Places stat row labels and entry points
     for value in range(len(stats)):
-        stat_label = Label(master, text=stats[value])
-        stat_label.grid(row=STAT_ROW+value+1, 
-                        column=0, 
-                        columnspan=4)
-
+        statLabel = Label(master, text=stats[value])
+        statLabel.grid(row=STAT_ROW_LABEL_ROW+value, 
+                       column=STAT_ROW_LABEL_COL, 
+                       columnspan=STAT_ROW_LABEL_SPAN)
+        
         orig = Entry(master)
-        orig.config(width=STAT_WIDTH)
-        orig.grid(row=STAT_ROW+value+1, 
-                  column=STAT_COL+5)
-
+        orig.config(width=STAT_ENTRY_WIDTH)
+        orig.grid(row=STAT_ENTRY_ROW+value, 
+                  column=STAT_ENTRY_COL)
         mod = Entry(master)
-        mod.config(width=STAT_WIDTH)
-        mod.grid(row=STAT_ROW+value+1, 
-                 column=STAT_COL+6)
-
+        mod.config(width=STAT_ENTRY_WIDTH)
+        mod.grid(row=STAT_ENTRY_ROW+value, 
+                 column=STAT_ENTRY_COL+1)
+        total = Entry(master)
+        total.config(width=STAT_ENTRY_WIDTH)
+        total.grid(row=STAT_ENTRY_ROW+value,
+                   column=STAT_ENTRY_COL+2)
         bonus = Entry(master)
-        bonus.config(width=STAT_WIDTH)
-        bonus.grid(row=STAT_ROW+value+1, 
-                   column=STAT_COL+7)
+        bonus.config(width=STAT_ENTRY_WIDTH)
+        bonus.grid(row=STAT_ENTRY_ROW+value, 
+                   column=STAT_ENTRY_COL+3)
 
         entries[value + len(base)] = mod
 
 #Creates resistance labels and input grid
 #entry()'s are too spaced out
-#GOAL: Fix spacing errors
-#GOAL: Label each column
 def set_resist(master):
-    RESIST_ROW = 4; RESIST_COL = 9; RESIST_WIDTH = 3
+    RESIST_SECTION_LABEL_ROW = 3
+    RESIST_SECTION_LABEL_COL = 5
+    RESIST_SECTION_LABEL_SPAN = 4
+    RESIST_COL_LABEL_ROW = RESIST_SECTION_LABEL_ROW + 1
+    RESIST_COL_LABEL_COL = RESIST_SECTION_LABEL_COL
+    RESIST_COL_LABEL_SPAN = 1
+    RESIST_ROW_LABEL_ROW = RESIST_COL_LABEL_ROW + 1
+    RESIST_ROW_LABEL_COL = RESIST_SECTION_LABEL_COL
+    RESIST_ROW_LABEL_SPAN = 1
+    RESIST_ENTRY_ROW = RESIST_ROW_LABEL_ROW
+    RESIST_ENTRY_COL = RESIST_ROW_LABEL_COL + 1
+    RESIST_ENTRY_WIDTH = 4
+    RESIST_ENTRY_SPAN = 1
+
+    colLabels = (' ', 'Base', 'Mod', 'Total')
 
     resistSectionLabel = Label(master, text='Resistances')
-    resistSectionLabel.grid(row=RESIST_ROW, 
-                              column=RESIST_COL, 
-                              columnspan=7)
+    resistSectionLabel.grid(row=RESIST_SECTION_LABEL_ROW, 
+                            column=RESIST_SECTION_LABEL_COL, 
+                            columnspan=RESIST_SECTION_LABEL_SPAN)
+                            
+    for label in range(len(colLabels)):
+        nextLabel = Label(master, text=colLabels[label])
+        nextLabel.grid(row=RESIST_COL_LABEL_ROW,
+                       column=RESIST_COL_LABEL_COL+label,
+                       columnspan=RESIST_COL_LABEL_SPAN)
 
     for value in range(len(resist)):
         resistLabel = Label(master, text=resist[value])
-        resistLabel.grid(row=RESIST_ROW+value+1, 
-                          column=RESIST_COL, 
-                          columnspan=4)
+        resistLabel.grid(row=RESIST_ROW_LABEL_ROW+value, 
+                         column=RESIST_ROW_LABEL_COL, 
+                         columnspan=RESIST_ROW_LABEL_SPAN)
 
         orig = Entry(master)
-        orig.config(width=RESIST_WIDTH)
-        orig.grid(row=RESIST_ROW+value+1, 
-                  column=RESIST_COL+4)
+        orig.config(width=RESIST_ENTRY_WIDTH)
+        orig.grid(row=RESIST_ENTRY_ROW+value, 
+                  column=RESIST_ENTRY_COL)
 
         mod = Entry(master)
-        mod.config(width=RESIST_WIDTH)
-        mod.grid(row=RESIST_ROW+value+1, 
-                 column=RESIST_COL+5)
+        mod.config(width=RESIST_ENTRY_WIDTH)
+        mod.grid(row=RESIST_ENTRY_ROW+value, 
+                 column=RESIST_ENTRY_COL+1)
 
         total = Entry(master)
-        total.config(width=RESIST_WIDTH)
-        total.grid(row=RESIST_ROW+value+1, 
-                   column=RESIST_COL+6)
+        total.config(width=RESIST_ENTRY_WIDTH)
+        total.grid(row=RESIST_ENTRY_ROW+value, 
+                   column=RESIST_ENTRY_COL+2)
 
     entries[value + len(base) + len(stats)] = total
 
@@ -135,15 +171,11 @@ def make_app(master):
     stats = ('Strenth', 'Dexterity', 'Constitution', 
              'Intelligence', 'Wisdom', 'Charisma')
     resist = ('Fortitude', 'Reflex', 'Willpower')
-
     entries = {}
 
     set_basic(master)
     set_stats(master)
     set_resist(master)
-
-    empty_section(master, 8, 3, 1, 7)
-    empty_section(master, 0, 3, 100, 1)
 
     updateButton = Button(master, text='Update', command=print_entries)
     updateButton.grid(row=12, 
