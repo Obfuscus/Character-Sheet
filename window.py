@@ -40,25 +40,35 @@ def set_basic(master):
                            columnspan=BASIC_SECTION_LABEL_SPAN)
                            
     #Prints labels for each entry() it places
-    for value in range(len(base)):
-        basicLabel = Label(master, text=base[value])
-        basicLabel.grid(row=BASIC_ENTRY_LABEL_ROW,
-                        column=BASIC_ENTRY_LABEL_COL+value*
-                               (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
-                        columnspan=BASIC_ENTRY_LABEL_SPAN)
-                        
-        basic = Entry(master)
-        basic.config(width=BASIC_ENTRY_WIDTH)
-        basic.grid(row=BASIC_ENTRY_ROW,
-                   column=BASIC_ENTRY_COL+value*
-                          (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
-                   columnspan=BASIC_ENTRY_SPAN)
+    for value in range(len(basic)):
+        basicLabel = Label(master, text=basic[value])
+        base = Entry(master)
+        base.config(width=BASIC_ENTRY_WIDTH)
+        
+        if value <= 4:
+            basicLabel.grid(row=BASIC_ENTRY_LABEL_ROW,
+                            column=BASIC_ENTRY_LABEL_COL+value*
+                                   (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
+                            columnspan=BASIC_ENTRY_LABEL_SPAN)
+            base.grid(row=BASIC_ENTRY_ROW,
+                       column=BASIC_ENTRY_COL+value*
+                              (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
+                       columnspan=BASIC_ENTRY_SPAN)
+        else:
+            basicLabel.grid(row=BASIC_ENTRY_LABEL_ROW+1,
+                            column=BASIC_ENTRY_LABEL_COL+(value-5)*
+                                   (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
+                            columnspan=BASIC_ENTRY_LABEL_SPAN)
+            base.grid(row=BASIC_ENTRY_ROW+1,
+                       column=BASIC_ENTRY_COL+(value-5)*
+                              (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
+                       columnspan=BASIC_ENTRY_SPAN)
 
-        entries[value] = basic
+        entries[value] = base
 
 #Creates stat labels and input grid
 def set_stats(master):
-    STAT_SECTION_LABEL_ROW      = 3
+    STAT_SECTION_LABEL_ROW      = 4
     STAT_SECTION_LABEL_COL      = 0
     STAT_SECTION_LABEL_SPAN     = 5
     STAT_ROW_LABEL_ROW          = STAT_SECTION_LABEL_ROW + 2
@@ -106,11 +116,11 @@ def set_stats(master):
         bonus.grid(row=STAT_ENTRY_ROW+value, 
                    column=STAT_ENTRY_COL+3)
 
-        entries[value + len(base)] = total
+        entries[value + len(basic)] = total
 
 #Creates resistance labels and input grid
 def set_resist(master):
-    RESIST_SECTION_LABEL_ROW    = 3
+    RESIST_SECTION_LABEL_ROW    = 4
     RESIST_SECTION_LABEL_COL    = 5
     RESIST_SECTION_LABEL_SPAN   = 4
     RESIST_COL_LABEL_ROW        = RESIST_SECTION_LABEL_ROW + 1
@@ -157,24 +167,54 @@ def set_resist(master):
         total.grid(row=RESIST_ENTRY_ROW+value, 
                    column=RESIST_ENTRY_COL+2)
 
-        entries[value + len(base) + len(stats)] = total
+        entries[value + len(basic) + len(stats)] = total
 
+def set_AC(master):
+    AC_SECTION_LABEL_ROW    = 9
+    AC_SECTION_LABEL_COL    = 6
+    AC_SECTION_LABEL_SPAN   = 4
+    AC_COL_LABEL_ROW        = AC_SECTION_LABEL_ROW + 1
+    AC_COL_LABEL_COL        = AC_SECTION_LABEL_COL
+    AC_COL_LABEL_SPAN       = 1
+    AC_ENTRY_ROW            = AC_COL_LABEL_ROW + 1
+    AC_ENTRY_COL            = AC_COL_LABEL_COL
+    AC_ENTRY_WIDTH          = 4
+    AC_ENTRY_SPAN           = 1
+    
+    ACSectionLabel = Label(master, text='Armor Class')
+    ACSectionLabel.grid(row=AC_SECTION_LABEL_ROW,
+                        column=AC_SECTION_LABEL_COL,
+                        columnspan=AC_SECTION_LABEL_SPAN)
+    
+    for label in range(len(ac)):
+        nextLabel = Label(master, text=ac[label])
+        nextLabel.grid(row=AC_COL_LABEL_ROW,
+                       column=AC_COL_LABEL_COL+label,
+                       columnspan=AC_COL_LABEL_SPAN)
+        
+        base = Entry(master)
+        base.config(width=AC_ENTRY_WIDTH)
+        base.grid(row=AC_ENTRY_ROW,
+                  column=AC_ENTRY_COL+label)
+        
+        entries[label + len(basic) + len(stats) + len(ac)] = base
+    
 #Combines all character modules into one winow
-#This function will probably change a lot
-#May want to make this a class
-#GOAL: Just make this better.
 def make_app(master):
-    global base, stats, resist, entries
+    global basic, stats, resist, ac, entries
 
-    base    = ('Name', 'Race', 'Class', 'Age', 'Weight')
+    basic   = ('Name', 'Race', 'Class', 'Age', 'Weight',
+                'Alignment', 'Sex', 'Eyes', 'Hair', 'Height')
     stats   = ('Strenth', 'Dexterity', 'Constitution', 
                'Intelligence', 'Wisdom', 'Charisma')
     resist  = ('Fortitude', 'Reflex', 'Willpower')
+    ac      = ('Base', 'FF', 'Touch')
     entries = {}
 
     set_basic(master)
     set_stats(master)
     set_resist(master)
+    set_AC(master)
 
     updateButton = Button(master, text='Update', command=print_entries)
     updateButton.grid(row=12, 
