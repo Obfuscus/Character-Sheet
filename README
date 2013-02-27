@@ -1,0 +1,19 @@
+Author: Dylan Jones
+
+This is just a simple project for me to learn the ins and outs of
+Tkinter in Python 2.7. I'm currently working with grid placement and 
+trying to learn how to make a GUI look clean using this method. I 
+would also like to make the program output data formatted in html.
+
+GOALS:
+  
+  Completed:
+    -Label each column for the Statistics section
+    -Label each column for the Resistances section
+    -Fix formatting issues in Statistics section
+    -Fix formatting issues in Resistances section
+    -Remove unnecessary grid formatting
+  
+  In Progress:
+    -Create Armor Class section
+    -Finish this README
