@@ -14,6 +14,35 @@ GOALS:
     -Fix formatting issues in Resistances section
     -Remove unnecessary grid formatting
   
-  In Progress:
+  In Progress Features:
+  
+  In Progress Additions:
     -Create Armor Class section
-    -Finish this README
+    -Flesh out Basic Character Information Section
+
+  Future Features:
+    -Saving and Loading characters
+    -Output to HTML format
+    -Dropdown menus with numerous options for entries such as:
+      >race
+      >weapons
+      >armor
+    -Database of equipment
+
+  Future Additions:
+    -Add Skill section
+      >Possible scrolling section
+      >Automatically retrieve bonuses based on skill, items, race
+    -Add Initiative
+      >Automatically retrieve bonuses based on skill, items, race
+    -Add Base Ranged Attack section
+      >Automatically retrieve bonuses based on skill, items, race
+    -Add Base Melee Attack section
+      >Automatically retrieve bonuses based on skill, items, race
+    -Add Weapon section
+      >Automatically retrieve bonuses
+      >"Add another weapon" option
+    -Add Armor section
+      >Automatically retrieve bonuses
+      >Dropdown menue with armor type
+      >"Add another piece of armor" option
