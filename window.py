@@ -23,16 +23,16 @@ def empty_section(master, x, y, length, height):
 #GOAL: Add more characteristics
 #GOAL: Change formattting to make it prettier
 def set_basic(master):
-    BASIC_SECTION_LABEL_ROW = 0
-    BASIC_SECTION_LABEL_COL = 0
-    BASIC_SECTION_LABEL_SPAN = 100
-    BASIC_ENTRY_LABEL_ROW = BASIC_SECTION_LABEL_ROW + 1
-    BASIC_ENTRY_LABEL_COL = 0
-    BASIC_ENTRY_LABEL_SPAN = 1
-    BASIC_ENTRY_ROW = BASIC_ENTRY_LABEL_ROW
-    BASIC_ENTRY_COL = BASIC_ENTRY_LABEL_COL + 1
-    BASIC_ENTRY_WIDTH = 16
-    BASIC_ENTRY_SPAN = 4
+    BASIC_SECTION_LABEL_ROW     = 0
+    BASIC_SECTION_LABEL_COL     = 0
+    BASIC_SECTION_LABEL_SPAN    = 100
+    BASIC_ENTRY_LABEL_ROW       = BASIC_SECTION_LABEL_ROW + 1
+    BASIC_ENTRY_LABEL_COL       = 0
+    BASIC_ENTRY_LABEL_SPAN      = 1
+    BASIC_ENTRY_ROW             = BASIC_ENTRY_LABEL_ROW
+    BASIC_ENTRY_COL             = BASIC_ENTRY_LABEL_COL + 1
+    BASIC_ENTRY_WIDTH           = 16
+    BASIC_ENTRY_SPAN            = 4
 
     basicSectionLabel = Label(master, text='Basic Character Information')
     basicSectionLabel.grid(row=BASIC_SECTION_LABEL_ROW, 
@@ -46,7 +46,7 @@ def set_basic(master):
                         column=BASIC_ENTRY_LABEL_COL+value*
                                (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
                         columnspan=BASIC_ENTRY_LABEL_SPAN)
-
+                        
         basic = Entry(master)
         basic.config(width=BASIC_ENTRY_WIDTH)
         basic.grid(row=BASIC_ENTRY_ROW,
@@ -58,17 +58,17 @@ def set_basic(master):
 
 #Creates stat labels and input grid
 def set_stats(master):
-    STAT_SECTION_LABEL_ROW = 3
-    STAT_SECTION_LABEL_COL = 0
-    STAT_SECTION_LABEL_SPAN = 5
-    STAT_ROW_LABEL_ROW = STAT_SECTION_LABEL_ROW + 2
-    STAT_ROW_LABEL_COL = 0
-    STAT_ROW_LABEL_SPAN = 1
-    STAT_COL_LABEL_ROW = STAT_SECTION_LABEL_ROW + 1
-    STAT_COL_LABEL_COL = STAT_ROW_LABEL_COL + STAT_ROW_LABEL_SPAN-1
-    STAT_ENTRY_ROW = STAT_COL_LABEL_ROW + 1
-    STAT_ENTRY_COL = STAT_ROW_LABEL_SPAN
-    STAT_ENTRY_WIDTH = 4
+    STAT_SECTION_LABEL_ROW      = 3
+    STAT_SECTION_LABEL_COL      = 0
+    STAT_SECTION_LABEL_SPAN     = 5
+    STAT_ROW_LABEL_ROW          = STAT_SECTION_LABEL_ROW + 2
+    STAT_ROW_LABEL_COL          = 0
+    STAT_ROW_LABEL_SPAN         = 1
+    STAT_COL_LABEL_ROW          = STAT_SECTION_LABEL_ROW + 1
+    STAT_COL_LABEL_COL          = STAT_ROW_LABEL_COL + STAT_ROW_LABEL_SPAN-1
+    STAT_ENTRY_ROW              = STAT_COL_LABEL_ROW + 1
+    STAT_ENTRY_COL              = STAT_ROW_LABEL_SPAN
+    STAT_ENTRY_WIDTH            = 4
 
     colLabels = (' ', 'Base', 'Mod', 'Total', 'Bonus')
     
@@ -76,12 +76,13 @@ def set_stats(master):
     statSectionLabel.grid(row=STAT_SECTION_LABEL_ROW, 
                           column=STAT_SECTION_LABEL_COL, 
                           columnspan=STAT_SECTION_LABEL_SPAN)
+                          
     #Prints stat column labels
     for label in range(len(colLabels)):
         nextLabel = Label(master, text=colLabels[label])
         nextLabel.grid(row=STAT_COL_LABEL_ROW,
                        column=STAT_COL_LABEL_COL+label)
-    #Places stat row labels and entry points
+    #Places stat row labels and place stat entries
     for value in range(len(stats)):
         statLabel = Label(master, text=stats[value])
         statLabel.grid(row=STAT_ROW_LABEL_ROW+value, 
@@ -108,21 +109,20 @@ def set_stats(master):
         entries[value + len(base)] = total
 
 #Creates resistance labels and input grid
-#entry()'s are too spaced out
 def set_resist(master):
-    RESIST_SECTION_LABEL_ROW = 3
-    RESIST_SECTION_LABEL_COL = 5
-    RESIST_SECTION_LABEL_SPAN = 4
-    RESIST_COL_LABEL_ROW = RESIST_SECTION_LABEL_ROW + 1
-    RESIST_COL_LABEL_COL = RESIST_SECTION_LABEL_COL
-    RESIST_COL_LABEL_SPAN = 1
-    RESIST_ROW_LABEL_ROW = RESIST_COL_LABEL_ROW + 1
-    RESIST_ROW_LABEL_COL = RESIST_SECTION_LABEL_COL
-    RESIST_ROW_LABEL_SPAN = 1
-    RESIST_ENTRY_ROW = RESIST_ROW_LABEL_ROW
-    RESIST_ENTRY_COL = RESIST_ROW_LABEL_COL + 1
-    RESIST_ENTRY_WIDTH = 4
-    RESIST_ENTRY_SPAN = 1
+    RESIST_SECTION_LABEL_ROW    = 3
+    RESIST_SECTION_LABEL_COL    = 5
+    RESIST_SECTION_LABEL_SPAN   = 4
+    RESIST_COL_LABEL_ROW        = RESIST_SECTION_LABEL_ROW + 1
+    RESIST_COL_LABEL_COL        = RESIST_SECTION_LABEL_COL
+    RESIST_COL_LABEL_SPAN       = 1
+    RESIST_ROW_LABEL_ROW        = RESIST_COL_LABEL_ROW + 1
+    RESIST_ROW_LABEL_COL        = RESIST_SECTION_LABEL_COL
+    RESIST_ROW_LABEL_SPAN       = 1
+    RESIST_ENTRY_ROW            = RESIST_ROW_LABEL_ROW
+    RESIST_ENTRY_COL            = RESIST_ROW_LABEL_COL + 1
+    RESIST_ENTRY_WIDTH          = 4
+    RESIST_ENTRY_SPAN           = 1
 
     colLabels = (' ', 'Base', 'Mod', 'Total')
 
@@ -130,13 +130,14 @@ def set_resist(master):
     resistSectionLabel.grid(row=RESIST_SECTION_LABEL_ROW, 
                             column=RESIST_SECTION_LABEL_COL, 
                             columnspan=RESIST_SECTION_LABEL_SPAN)
-                            
+    
+    #Prints resistance column labels                        
     for label in range(len(colLabels)):
         nextLabel = Label(master, text=colLabels[label])
         nextLabel.grid(row=RESIST_COL_LABEL_ROW,
                        column=RESIST_COL_LABEL_COL+label,
                        columnspan=RESIST_COL_LABEL_SPAN)
-
+    #Print resistance row labels and place resistance entries
     for value in range(len(resist)):
         resistLabel = Label(master, text=resist[value])
         resistLabel.grid(row=RESIST_ROW_LABEL_ROW+value, 
@@ -147,12 +148,10 @@ def set_resist(master):
         orig.config(width=RESIST_ENTRY_WIDTH)
         orig.grid(row=RESIST_ENTRY_ROW+value, 
                   column=RESIST_ENTRY_COL)
-
         mod = Entry(master)
         mod.config(width=RESIST_ENTRY_WIDTH)
         mod.grid(row=RESIST_ENTRY_ROW+value, 
                  column=RESIST_ENTRY_COL+1)
-
         total = Entry(master)
         total.config(width=RESIST_ENTRY_WIDTH)
         total.grid(row=RESIST_ENTRY_ROW+value, 
@@ -167,10 +166,10 @@ def set_resist(master):
 def make_app(master):
     global base, stats, resist, entries
 
-    base = ('Name', 'Race', 'Class', 'Age', 'Weight')
-    stats = ('Strenth', 'Dexterity', 'Constitution', 
-             'Intelligence', 'Wisdom', 'Charisma')
-    resist = ('Fortitude', 'Reflex', 'Willpower')
+    base    = ('Name', 'Race', 'Class', 'Age', 'Weight')
+    stats   = ('Strenth', 'Dexterity', 'Constitution', 
+               'Intelligence', 'Wisdom', 'Charisma')
+    resist  = ('Fortitude', 'Reflex', 'Willpower')
     entries = {}
 
     set_basic(master)
