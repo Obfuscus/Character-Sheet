@@ -105,7 +105,7 @@ def set_stats(master):
         bonus.grid(row=STAT_ENTRY_ROW+value, 
                    column=STAT_ENTRY_COL+3)
 
-        entries[value + len(base)] = mod
+        entries[value + len(base)] = total
 
 #Creates resistance labels and input grid
 #entry()'s are too spaced out
@@ -158,7 +158,7 @@ def set_resist(master):
         total.grid(row=RESIST_ENTRY_ROW+value, 
                    column=RESIST_ENTRY_COL+2)
 
-    entries[value + len(base) + len(stats)] = total
+        entries[value + len(base) + len(stats)] = total
 
 #Combines all character modules into one winow
 #This function will probably change a lot
