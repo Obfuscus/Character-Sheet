@@ -12,16 +12,13 @@ def print_entries():
 #Not currently in use
 #GOAL: Figure out a better way to create space between different sections
 def empty_section(master, x, y, length, height):
-    empty = Label(master, text='1234')
+    empty = Label(master, text=' ')
     empty.grid(column=x, 
                row=y, 
                columnspan=length, 
                rowspan=height)
 
 #Creates all of the basic information for the character
-#Not sure if I like the formatting the way it is currently
-#GOAL: Add more characteristics
-#GOAL: Change formattting to make it prettier
 def set_basic(master):
     BASIC_SECTION_LABEL_ROW     = 0
     BASIC_SECTION_LABEL_COL     = 0
@@ -34,6 +31,7 @@ def set_basic(master):
     BASIC_ENTRY_WIDTH           = 16
     BASIC_ENTRY_SPAN            = 4
 
+    #Prints section label centered over labels and entries
     basicSectionLabel = Label(master, text='Basic Character Information')
     basicSectionLabel.grid(row=BASIC_SECTION_LABEL_ROW, 
                            column=BASIC_SECTION_LABEL_COL, 
@@ -49,20 +47,24 @@ def set_basic(master):
             basicLabel.grid(row=BASIC_ENTRY_LABEL_ROW,
                             column=BASIC_ENTRY_LABEL_COL+value*
                                    (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
-                            columnspan=BASIC_ENTRY_LABEL_SPAN)
+                            columnspan=BASIC_ENTRY_LABEL_SPAN,
+                            sticky=E)
             base.grid(row=BASIC_ENTRY_ROW,
-                       column=BASIC_ENTRY_COL+value*
-                              (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
-                       columnspan=BASIC_ENTRY_SPAN)
+                      column=BASIC_ENTRY_COL+value*
+                             (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
+                      columnspan=BASIC_ENTRY_SPAN,
+                      sticky=W)
         else:
             basicLabel.grid(row=BASIC_ENTRY_LABEL_ROW+1,
                             column=BASIC_ENTRY_LABEL_COL+(value-5)*
                                    (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
-                            columnspan=BASIC_ENTRY_LABEL_SPAN)
+                            columnspan=BASIC_ENTRY_LABEL_SPAN,
+                            sticky=E)
             base.grid(row=BASIC_ENTRY_ROW+1,
-                       column=BASIC_ENTRY_COL+(value-5)*
-                              (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
-                       columnspan=BASIC_ENTRY_SPAN)
+                      column=BASIC_ENTRY_COL+(value-5)*
+                             (BASIC_ENTRY_LABEL_SPAN+BASIC_ENTRY_SPAN),
+                      columnspan=BASIC_ENTRY_SPAN,
+                      sticky=W)
 
         entries[value] = base
 
@@ -82,6 +84,7 @@ def set_stats(master):
 
     colLabels = (' ', 'Base', 'Mod', 'Total', 'Bonus')
     
+    #Prints section label centered over labels and entries
     statSectionLabel = Label(master, text='Statistics')
     statSectionLabel.grid(row=STAT_SECTION_LABEL_ROW, 
                           column=STAT_SECTION_LABEL_COL, 
@@ -97,7 +100,8 @@ def set_stats(master):
         statLabel = Label(master, text=stats[value])
         statLabel.grid(row=STAT_ROW_LABEL_ROW+value, 
                        column=STAT_ROW_LABEL_COL, 
-                       columnspan=STAT_ROW_LABEL_SPAN)
+                       columnspan=STAT_ROW_LABEL_SPAN,
+                       sticky=E)
         
         orig = Entry(master)
         orig.config(width=STAT_ENTRY_WIDTH)
@@ -136,6 +140,7 @@ def set_resist(master):
 
     colLabels = (' ', 'Base', 'Mod', 'Total')
 
+    #Prints section label centered over labels and entries
     resistSectionLabel = Label(master, text='Resistances')
     resistSectionLabel.grid(row=RESIST_SECTION_LABEL_ROW, 
                             column=RESIST_SECTION_LABEL_COL, 
@@ -152,7 +157,8 @@ def set_resist(master):
         resistLabel = Label(master, text=resist[value])
         resistLabel.grid(row=RESIST_ROW_LABEL_ROW+value, 
                          column=RESIST_ROW_LABEL_COL, 
-                         columnspan=RESIST_ROW_LABEL_SPAN)
+                         columnspan=RESIST_ROW_LABEL_SPAN,
+                         sticky=E)
 
         orig = Entry(master)
         orig.config(width=RESIST_ENTRY_WIDTH)
@@ -181,6 +187,7 @@ def set_AC(master):
     AC_ENTRY_WIDTH          = 4
     AC_ENTRY_SPAN           = 1
     
+    #Prints section label centered over labels and entries
     ACSectionLabel = Label(master, text='Armor Class')
     ACSectionLabel.grid(row=AC_SECTION_LABEL_ROW,
                         column=AC_SECTION_LABEL_COL,
@@ -203,7 +210,7 @@ def set_AC(master):
 def make_app(master):
     global basic, stats, resist, ac, entries
 
-    basic   = ('Name', 'Race', 'Class', 'Age', 'Weight',
+    basic    = ('Name', 'Race', 'Class', 'Age', 'Weight',
                 'Alignment', 'Sex', 'Eyes', 'Hair', 'Height')
     stats   = ('Strenth', 'Dexterity', 'Constitution', 
                'Intelligence', 'Wisdom', 'Charisma')
@@ -218,7 +225,7 @@ def make_app(master):
 
     updateButton = Button(master, text='Update', command=print_entries)
     updateButton.grid(row=12, 
-                      column=60, 
+                      column=24,
                       sticky=SE)
 
 #Need to make this better
